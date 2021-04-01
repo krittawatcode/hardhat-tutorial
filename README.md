@@ -2,6 +2,10 @@
 `make sure you install git and node`  
 for easy setup without clone this repo you can follow hardhat tutorial  
 https://hardhat.org/tutorial/creating-a-new-hardhat-project.html
+- install hardhat to your project   
+  `npm install --save-dev hardhat`  
+- install plugin for testing  
+  `npm install --save-dev @nomiclabs/hardhat-ethers ethers @nomiclabs/hardhat-waffle ethereum-waffle chai`
 
 ## Run 
 - `npx hardhat compile` 
