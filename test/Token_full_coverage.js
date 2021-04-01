@@ -27,7 +27,7 @@ describe("Token contract", function () {
 
   // `beforeEach` will run before each test, re-deploying the contract every
   // time. It receives a callback, which can be async.
-  beforeEach(async function () {
+  beforeEach(async () => {
     // Get the ContractFactory and Signers here.
     Token = await ethers.getContractFactory("Token");
     [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
@@ -39,12 +39,12 @@ describe("Token contract", function () {
   });
 
   // You can nest describe calls to create subsections.
-  describe("Deployment", function () {
+  describe("Deployment", async () => {
     // `it` is another Mocha function. This is the one you use to define your
     // tests. It receives the test name, and a callback function.
 
     // If the callback function is async, Mocha will `await` it.
-    it("Should set the right owner", async function () {
+    it("Should set the right owner", async () => {
       // Expect receives a value, and wraps it in an Assertion object. These
       // objects have a lot of utility methods to assert values.
 
@@ -53,14 +53,14 @@ describe("Token contract", function () {
       expect(await hardhatToken.owner()).to.equal(owner.address);
     });
 
-    it("Should assign the total supply of tokens to the owner", async function () {
+    it("Should assign the total supply of tokens to the owner", async () => {
       const ownerBalance = await hardhatToken.balanceOf(owner.address);
       expect(await hardhatToken.totalSupply()).to.equal(ownerBalance);
     });
   });
 
   describe("Transactions", function () {
-    it("Should transfer tokens between accounts", async function () {
+    it("Should transfer tokens between accounts", async () => {
       // Transfer 50 tokens from owner to addr1
       await hardhatToken.transfer(addr1.address, 50);
       const addr1Balance = await hardhatToken.balanceOf(addr1.address);
@@ -73,7 +73,7 @@ describe("Token contract", function () {
       expect(addr2Balance).to.equal(50);
     });
 
-    it("Should fail if sender doesn’t have enough tokens", async function () {
+    it("Should fail if sender doesn’t have enough tokens", async () => {
       const initialOwnerBalance = await hardhatToken.balanceOf(owner.address);
 
       // Try to send 1 token from addr1 (0 tokens) to owner (1000 tokens).
@@ -88,7 +88,7 @@ describe("Token contract", function () {
       );
     });
 
-    it("Should update balances after transfers", async function () {
+    it("Should update balances after transfers", async () => {
       const initialOwnerBalance = await hardhatToken.balanceOf(owner.address);
 
       // Transfer 100 tokens from owner to addr1.
